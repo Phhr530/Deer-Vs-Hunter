@@ -1,17 +1,9 @@
-//create an empty array called balls
-let balls = [];
 
 //create a variable to hold your avatar
 let me;
 let r;
 let g;
 let b;
-
-function preload() {
-  soundFormats('mp3', 'ogg');
-  mySound = loadSound('Bruh Sound Effect.mp3');
-}
-
 
 function setup() {
   createCanvas(1000, 780);
@@ -30,32 +22,12 @@ function draw(){
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 15 == 0) {
-      let  b = new Ball(width, random(0,580), -3, 1);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
-    }
-
-    if (frameCount % 15 == 0) {
-        let  b = new Ball(0, random(0,580), 3, 1);
-        balls.push(b);
-        console.log(balls); //print the balls array to the console
-      }
-
     if (frameCount % 2 == 0){
       me.y = me.y + 10
     }
 
     if (me.y >= 500){
       me.y=499
-    }
-
-//	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
-          balls[i].bouncefloor();
 	  }
 
 }
@@ -81,8 +53,7 @@ class Avatar {
         // line(this.x+10, this.y+50, this.x+5, this.y+60);
         // line(this.x, this.y+15, this.x-10, this.y+25);
         // line(this.x-10, this.y+25, this.x+10, this.y+35);
-        fill("blue");
-        rect(this.x,this.y,30,80);
+        ellipse(this.x,this.y,80);
 	}
 
 	moveMe(){
@@ -125,45 +96,6 @@ if (me.y = 0){
 
     }
   }
-
-}
-//ball class from which to create new balls with similar properties.
-class Ball {
-
-	//every ball needs an x value, a y value, and a speed
-	constructor(x,y,speed,jump){
-		this.x = x;
-    this.y = y;
-    this.speed = speed;
-    this.jump = jump;
-	}
-
-	// draw a ball on the screen at x,y
-	drawBall(){
-    	stroke(0);
-      strokeWeight(1);
-    	fill("red");
-		  ellipse(this.x,this.y,10,10);
-	}
-
-	//update the location of the ball, so it moves across the screen
-	moveBall(){
-		this.x = this.x+ this.speed;
-		this.y = this.y+ this.jump;
-	}
-
-	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceBall(){
-    		if (this.x >= me.x && this.x <= me.x+30 && this.y > me.y && this.y < me.y+80){
-      			this.speed = -this.speed;
-            r = 0
-            g = 0
-            b = 0
-            mySound.setVolume(0.1);
-            mySound.play();
-
-          }
-  	}
  bouncefloor(){
    if (this.y >= 580){
    this.jump = -this.jump;
