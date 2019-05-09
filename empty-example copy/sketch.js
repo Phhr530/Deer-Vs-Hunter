@@ -43,16 +43,6 @@ class Avatar {
 
 
 	drawMe(){
-    		// stroke("green");
-        // strokeWeight(3);
-    		// fill("blue");
-		    // ellipse(this.x,this.y,20,20);
-        // line(this.x,this.y, this.x, this.y+40);
-        // line(this.x, this.y+40, this.x-20, this.y+60);
-        // line(this.x, this.y+40, this.x+10, this.y+50);
-        // line(this.x+10, this.y+50, this.x+5, this.y+60);
-        // line(this.x, this.y+15, this.x-10, this.y+25);
-        // line(this.x-10, this.y+25, this.x+10, this.y+35);
         ellipse(this.x,this.y,80);
         line(this.x+10,this.y,this.x+38,this.y)
         line(this.x-10,this.y,this.x-38,this.y)
@@ -62,11 +52,11 @@ class Avatar {
 	}
 
 	moveMe(){
-    if (keyIsDown(87)) { //if you hold the up arrow, move up by speed
+    if (keyIsDown(87)) { //if you hold the W key, move up by speed
        this.y -= this.speed;
     }
 
-    if (keyIsDown(63)){ // if you hold the down arrow, move down by speed
+    if (keyIsDown(63)){ // if you hold the S key, move down by speed
         this.y += this.speed;
     }
     if (keyIsDown(65)){
@@ -76,7 +66,7 @@ class Avatar {
       this.x += this.speed;
     }
     if (keyIsDown(32)){
-      this.y = this.y-d  20
+      this.y = this.y-20
     }
 	}
 
