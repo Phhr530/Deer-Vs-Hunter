@@ -49,14 +49,17 @@ class Avatar {
     		fill("brown");
 		    ellipse(this.x+10,this.y,40,20); // head
         ellipse(this.x-30,this.y+20,100,20); //body
-        ellipse(this.x+10,this.y+20,40,20); //leg
+//leggs
+        line(this.x, this.y+70, this.x, this.y); //rightmost front leg
+        line(this.x, this.y, this.x-10, this.y+60); // leftmost front leg
+        line(this.x-60, this.y+60, this.x-50, this.y+10); // rightmost back leg
+        line(this.x-90, this.y+60, this.x-70, this.y+20); // leftmost back leg
 
-        
-        line(this.x, this.y, this.x-10, this.y+60); // left leg
-        line(this.x, this.y+40, this.x+10, this.y+50); // right upper leg
-        line(this.x+10, this.y+50, this.x+5, this.y+60); // right lower leg
-        line(this.x, this.y+15, this.x-10, this.y+25); // upper arm
-        line(this.x-10, this.y+25, this.x+10, this.y+35); // forearm
+
+
+
+
+
 	}
 
 	moveMe(){
@@ -95,7 +98,7 @@ class Ball {
         	this.speed = speed;
 	}
 
-	// draw a ball on the screen at x,y
+  // draw a ball on the screen at x,y
 	drawBall(){
     		stroke(0);
         	strokeWeight(1);
