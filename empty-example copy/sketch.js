@@ -49,16 +49,17 @@ class Avatar {
     		fill("brown");
 		    ellipse(this.x+10,this.y,40,20); // head
         ellipse(this.x-30,this.y+20,100,20); //body
+
+//antlerz
+line(this.x+10, this.y+20, this.x, this.y-30); //left antler
+line(this.x+10, this.y+20, this.x+30, this.y-30); //left antler
+
+
 //leggs
-        line(this.x, this.y+70, this.x, this.y); //rightmost front leg
-        line(this.x, this.y, this.x-10, this.y+60); // leftmost front leg
+        line(this.x, this.y+70, this.x+10, this.y); //rightmost front leg
+        line(this.x, this.y, this.x-30, this.y+60); // leftmost front leg
         line(this.x-60, this.y+60, this.x-50, this.y+10); // rightmost back leg
         line(this.x-90, this.y+60, this.x-70, this.y+20); // leftmost back leg
-
-
-
-
-
 
 	}
 
