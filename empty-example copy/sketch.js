@@ -68,13 +68,6 @@ class Avatar {
     if (keyIsDown(32)){
       this.y = this.y-20
     }
-	}
-
-  die(){
-if (me.y = 0){
-  me.y = 779
-
-    }
   }
  bouncefloor(){
    if (this.y >= 580){
