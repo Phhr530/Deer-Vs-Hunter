@@ -1,28 +1,41 @@
 //create an empty array called balls
 let balls = [];
-
-//create a variable to hold your avatar
 let me;
+let deer;
+let gun;
+let r;
+let g;
+let b;
 
 
 function setup() {
   createCanvas(500, 400);
 
-  //make one avatar called me
-  me = new Avatar(width/2, 300, 3);
+  deer = new Deer(width/2, 300, 3);
+  gun = new Gun(width/2,300,10)
 
 }
 
 function draw(){
 	background(220);
 
-  me.drawMe();
-  me.moveMe();
+  deer.drawMe();
+  deer.moveMe();
+  gun.drawGun();
+  gun.moveGun();
 
   if (frameCount % 25 == 0) {
       let  b = new Ball(width, random(0,height), -3);
       balls.push(b);
       console.log(balls); //print the balls array to the console
+    }
+
+    if (frameCount % 2 == 0){
+      gun.y = gun.y + 10
+    }
+
+    if (gun.y >= 500){
+      gun.y=499
     }
 
 //	draw all the balls in that array
@@ -35,7 +48,7 @@ function draw(){
 }
 
 //avatar class
-class Avatar {
+class Deer {
 
 	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
@@ -53,7 +66,7 @@ class Avatar {
 //antlerz
 line(this.x+10, this.y+20, this.x, this.y-30); //left antler
 line(this.x+10, this.y+20, this.x+30, this.y-30); //left antler
-
+line(this.x, this.y, this.x, this.y);
 
 //leggs
         line(this.x, this.y+70, this.x+10, this.y); //rightmost front leg
@@ -87,6 +100,52 @@ line(this.x+10, this.y+20, this.x+30, this.y-30); //left antler
   }
 
 }
+//avatar class
+class Gun {
+
+	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
+		    this.x = x;
+    		this.y = y;
+        this.speed = speed;
+	}
+
+
+	drawGun(){
+    noFill();
+    stroke("black");
+        ellipse(this.x,this.y,80);
+        line(this.x+10,this.y,this.x+38,this.y)
+        line(this.x-10,this.y,this.x-38,this.y)
+        line(this.x,this.y+10,this.x,this.y+38)
+        line(this.x,this.y-10,this.x,this.y-38)
+          ellipse(this.x,this.y,20);
+	}
+
+	moveGun(){
+    if (keyIsDown(87)) { //if you hold the W key, move up by speed
+       this.y -= this.speed;
+    }
+
+    if (keyIsDown(63)){ // if you hold the S key, move down by speed
+        this.y += this.speed;
+    }
+    if (keyIsDown(65)){
+      this.x -= this.speed;
+    }
+    if (keyIsDown(68)){
+      this.x += this.speed;
+    }
+    if (keyIsDown(32)){
+      this.y = this.y-20
+    }
+  }
+ bouncefloor(){
+   if (this.y >= 580){
+   this.jump = -this.jump;
+   }
+
+ }
+}
 
 
 //ball class from which to create new balls with similar properties.
@@ -95,8 +154,8 @@ class Ball {
 	//every ball needs an x value, a y value, and a speed
 	constructor(x,y, speed){
 		this.x = x;
-    		this.y = y;
-        	this.speed = speed;
+    this.y = y;
+    this.speed = speed;
 	}
 
   // draw a ball on the screen at x,y
@@ -115,7 +174,7 @@ class Ball {
 
 	//if the ball hits the paddle, change the speed value to negative (send it in the opposite direction)
   	bounceBall(){
-    		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
+    		if (this.x >= deer.x-15 && this.x <= deer.x+15 && this.y > deer.y-40 && this.y < deer.y+40){
       			this.speed = -this.speed;
 
     		}
