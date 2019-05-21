@@ -12,7 +12,7 @@ function setup() {
   b=255;
 
   //make one avatar called me
-  me = new Avatar(width/2, 300, 10);
+  gun = new Gun(width/2, 300, 10);
 
 }
 
@@ -33,7 +33,7 @@ function draw(){
 }
 
 //avatar class
-class Avatar {
+class Gun {
 
 	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
