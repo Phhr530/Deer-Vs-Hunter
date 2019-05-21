@@ -1,5 +1,3 @@
-//create an empty array called balls
-let balls = [];
 let me;
 let deer;
 let gun;
@@ -9,9 +7,9 @@ let b;
 
 
 function setup() {
-  createCanvas(500, 400);
+  createCanvas(800, 550);
 
-  deer = new Deer(width/2, 300, 3);
+  deer = new Deer(width/2, 100, 3,true);
   gun = new Gun(width/2,300,10)
 
 }
@@ -23,12 +21,7 @@ function draw(){
   deer.moveMe();
   gun.drawGun();
   gun.moveGun();
-
-  if (frameCount % 25 == 0) {
-      let  b = new Ball(width, random(0,height), -3);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
-    }
+  deer.die();
 
     if (frameCount % 2 == 0){
       gun.y = gun.y + 10
@@ -36,13 +29,6 @@ function draw(){
 
     if (gun.y >= 500){
       gun.y=499
-    }
-
-//	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
 	  }
 
 }
@@ -50,18 +36,22 @@ function draw(){
 //avatar class
 class Deer {
 
-	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
+	constructor(x,y, speed,alive){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
     		this.y = y;
         this.speed = speed;
+        this.alive = alive;
 	}
 
 	drawMe(){  // draw the running person
-    		stroke("brown");
-        strokeWeight(3);
-    		fill("brown");
-		    ellipse(this.x+10,this.y,40,20); // head
-        ellipse(this.x-30,this.y+20,100,20); //body
+if (this.alive==true){
+  stroke("brown");
+  strokeWeight(3);
+  fill("brown");
+  ellipse(this.x+10,this.y,40,20); // head
+  ellipse(this.x-30,this.y+20,100,20); //body
+
+
 
 //antlerz
 line(this.x+10, this.y+20, this.x, this.y-30); //left antler
@@ -69,10 +59,16 @@ line(this.x+10, this.y+20, this.x+30, this.y-30); //left antler
 line(this.x, this.y, this.x, this.y);
 
 //leggs
-        line(this.x, this.y+70, this.x+10, this.y); //rightmost front leg
-        line(this.x, this.y, this.x-30, this.y+60); // leftmost front leg
-        line(this.x-60, this.y+60, this.x-50, this.y+10); // rightmost back leg
-        line(this.x-90, this.y+60, this.x-70, this.y+20); // leftmost back leg
+  line(this.x, this.y+70, this.x+10, this.y); //rightmost front leg
+  line(this.x, this.y, this.x-30, this.y+60); // leftmost front leg
+  line(this.x-60, this.y+60, this.x-50, this.y+10); // rightmost back leg
+  line(this.x-90, this.y+60, this.x-70, this.y+20); // leftmost back leg
+}
+  else{
+    print("deer is dead")
+  fill(0);
+   rect(0,0,500,500)
+  }
 
 	}
 
@@ -95,9 +91,13 @@ line(this.x, this.y, this.x, this.y);
 
 }
 
-  die(){
-
+die(){
+  if (gun.x >= this.x-90 && gun.x <= this.x+30 && gun.y >= this.y-10 && gun.y <= this.y+40 && keyIsDown(32)){
+    this.alive = false;
+    print(this.alive);
   }
+
+}
 
 }
 //avatar class
@@ -119,6 +119,7 @@ class Gun {
         line(this.x,this.y+10,this.x,this.y+38)
         line(this.x,this.y-10,this.x,this.y-38)
           ellipse(this.x,this.y,20);
+
 	}
 
 	moveGun(){
@@ -145,39 +146,4 @@ class Gun {
    }
 
  }
-}
-
-
-//ball class from which to create new balls with similar properties.
-class Ball {
-
-	//every ball needs an x value, a y value, and a speed
-	constructor(x,y, speed){
-		this.x = x;
-    this.y = y;
-    this.speed = speed;
-	}
-
-  // draw a ball on the screen at x,y
-	drawBall(){
-    		stroke(0);
-        	strokeWeight(1);
-    		fill("red");
-		ellipse(this.x,this.y,10,10);
-	}
-
-	//update the location of the ball, so it moves across the screen
-	moveBall(){
-		this.x = this.x+ this.speed;
-		this.y = this.y+.5;
-	}
-
-	//if the ball hits the paddle, change the speed value to negative (send it in the opposite direction)
-  	bounceBall(){
-    		if (this.x >= deer.x-15 && this.x <= deer.x+15 && this.y > deer.y-40 && this.y < deer.y+40){
-      			this.speed = -this.speed;
-
-    		}
-  	}
-
 }
