@@ -89,6 +89,10 @@ if (this.alive==true){
   ellipse(this.x+10,this.y,40,20); // head
   ellipse(this.x-30,this.y+20,100,20); //body
 
+if (this.alive==false){
+  time==-10
+}
+
 
 
 //antlerz
