@@ -59,9 +59,9 @@ function draw(){
 
     if (frameCount%90 == 0){
       time=time+1
-    }
 
-    if (time==10){
+}
+    if (time>=10){
       rect(0,0,windowWidth,windowHeight)
       fill("white")
       textSize(50);
@@ -90,7 +90,7 @@ if (this.alive==true){
   ellipse(this.x-30,this.y+20,100,20); //body
 
 if (this.alive==false){
-  time==-10
+  time>=-10
 }
 
 
