@@ -4,13 +4,14 @@ let gun;
 let r;
 let g;
 let b;
+let time=0;
 
 
 function setup() {
-  createCanvas(800, 550);
+  createCanvas(windowWidth, windowHeight);
 
-  deer = new Deer(width/2, 100, 3,true);
-  gun = new Gun(width/2,300,10)
+  deer = new Deer(width/2, 100, 10,true);
+  gun = new Gun(width/2,300,9)
 
 }
 
@@ -23,13 +24,50 @@ function draw(){
   gun.moveGun();
   deer.die();
 
+  fill("black")
+  textSize(30);
+    text("wasd moves gun            arrows move deer            spacebar to shoot and kill the deer",100,windowHeight-20)
+
     if (frameCount % 2 == 0){
-      gun.y = gun.y + 10
+      gun.y = gun.y + 9
     }
 
-    if (gun.y >= 500){
-      gun.y=499
+    if (gun.y >= windowHeight-50){
+      gun.y=windowHeight-50
+    }
+    if (gun.x >= windowWidth-50){
+        gun.x=windowWidth-50
 	  }
+    if (gun.x <= 50){
+        gun.x= 50
+    }
+    if (gun.y <= 50){
+        gun.y= 50
+    }
+    if (deer.y >= windowHeight-50){
+      deer.y=windowHeight-50
+    }
+    if (deer.x >= windowWidth-50){
+        deer.x=windowWidth-50
+    }
+    if (deer.x <= 100){
+        deer.x= 100
+    }
+    if (deer.y <= 50){
+        deer.y= 50
+    }
+
+    if (frameCount%90 == 0){
+      time=time+1
+    }
+
+    if (time==10){
+      rect(0,0,windowWidth,windowHeight)
+      fill("white")
+      textSize(50);
+      textFont('Georgia');
+      text("deer wins",100,100)
+    }
 
 }
 
@@ -66,8 +104,12 @@ line(this.x, this.y, this.x, this.y);
 }
   else{
     print("deer is dead")
-  fill(0);
-   rect(0,0,500,500)
+  fill("red");
+   rect(0,0,windowWidth,windowHeight)
+   fill("black")
+   textSize(50);
+   textFont('Georgia');
+   text("deer is dead",100,100)
   }
 
 	}
@@ -141,7 +183,7 @@ class Gun {
     }
   }
  bouncefloor(){
-   if (this.y >= 580){
+   if (this.y >= windowHeight){
    this.jump = -this.jump;
    }
 
